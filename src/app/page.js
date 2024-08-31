@@ -8,6 +8,11 @@ export default function Home() {
 
   return (
     <>
+      <div class="lines">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
       {/* Navbar */}
       <nav
         className={`bg-transparent fixed top-0 left-0 w-full flex justify-between items-center py-4 px-8 z-50 transition-all duration-500 ${
@@ -103,6 +108,7 @@ export default function Home() {
         className="p-8 pb-8 md:pb-0"
       >
         {/* Replace with your main content */}
+
         <div className="pt-16">
           <div className="bg-gray-800 rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
             {/* Left Section: Profile Image */}
@@ -126,11 +132,11 @@ export default function Home() {
                 Computer Engineering and Mathematics
               </h2>
               <p className="text-lg mb-6">
-                Hey there! I'm a 22-year-old computer engineering student at the
-                University of Southern Mississippi with a passion for crafting
-                amazing software and hardware experiences. I am currently
-                studying computer engineering with a mathematics minor to deepen
-                my understanding of how to build sleek and efficient computer
+                Hey there! I'm a computer engineering student at the University
+                of Southern Mississippi with a passion for crafting amazing
+                software and hardware experiences. I am currently studying
+                computer engineering with a mathematics minor to deepen my
+                understanding of how to build sleek and efficient computer
                 software and machines to make our daily experiences better.
               </p>
               <p>
@@ -156,6 +162,107 @@ export default function Home() {
                   <i className="fab fa-instagram"></i>Instagram
                 </a>
               </div>
+            </div>
+          </div>
+          {/* Projects Section */}
+          <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
+          <div className="flex flex-wrap">
+            {/* Left Section: Project Description */}
+            <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
+              <h3 className="text-3xl font-bold mb-4">Vision Bot (2023)</h3>
+              <p className="text-lg mb-4 text-gray-400">
+                Vision Bot is an AI-powered, interactive, and user-friendly
+                platform designed to help creative professionals discover,
+                understand, and implement innovative design solutions.
+              </p>
+              <p className="text-lg mb-4 text-gray-400">
+                The platform aims to provide creative professionals with a
+                comprehensive, accessible, and engaging platform to discover,
+                understand, and implement innovative design solutions.
+              </p>
+              <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
+                VISIT LIVE SITE
+              </button>
+            </div>
+            {/* Right Section: Project Images */}
+            <div className="w-full md:w-1/2 overflow-y-auto h-96">
+              <Image
+                src="/kritisana/image1.jpeg"
+                alt="Project 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              <Image
+                src="/kritisana/image2.png"
+                alt="Project 2"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              <Image
+                src="/kritisana/image1.jpeg"
+                alt="Project 3"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              {/* Add more images as needed */}
+            </div>
+          </div>
+
+          <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
+          <div className="flex flex-row-reverse bg-blue">
+            {/* Left Section: Project Description */}
+            <div className="w-full md:w-1/2 pr-8 px-4 mb-8">
+              <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
+              <p className="text-lg mb-4 text-gray-400">
+                Lorem ipsum dolor sit amet, consectetur adip
+              </p>
+              <p className="text-lg mb-4 text-gray-400">
+                KritiSana is an online platform designed to help creative
+                professionals discover, understand, and implement innovative
+                design solutions.
+              </p>
+              <p className="text-lg mb-4 text-gray-400">
+                KritiSana aims to provide creative professionals with a
+                comprehensive, accessible, and engaging platform to discover,
+                understand, and implement innovative design solutions.
+              </p>
+              <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
+                VISIT LIVE SITE
+              </button>
+            </div>
+            {/* Right Section: Project Images */}
+            <div className="w-full md:w-1/2 overflow-y-auto h-96">
+              <Image
+                src="/kritisana/image1.jpeg"
+                alt="Project 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              <Image
+                src="/kritisana/image2.png"
+                alt="Project 2"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              <Image
+                src="/kritisana/image1.jpeg"
+                alt="Project 3"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              {/* Add more images as needed */}
             </div>
           </div>
         </div>
