@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link"; // Import Link from next/link
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -48,16 +47,16 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-4">Go to</h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="/">Home</Link>
+              <a href="/">Home</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="/about">About me</Link>
+              <a href="/about">About me</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="/projects">Projects</Link>
+              <a href="/projects">Projects</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="/contact">Contact</Link>
+              <a href="/contact">Contact</a>
             </li>
           </ul>
           <h2 className="text-2xl text-white font-bold mt-8 mb-4">
@@ -65,28 +64,28 @@ export default function Home() {
           </h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="/projects/schumacher">Schumacher</Link>
+              <a href="/projects/schumacher">Vision-Bot </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="/projects/snapserve">Snapserve</Link>
+              <a href="/projects/snapserve">KritiSana</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="/projects/pricemonitor">Price monitor</Link>
+              <a href="/projects/pricemonitor">Chat GPT with Esp32</a>
             </li>
           </ul>
           <h2 className="text-2xl font-bold mt-8 mb-4">Follow Us</h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="https://github.com">GitHub</Link>
+              <a href="https://github.com">GitHub</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="https://linkedin.com">LinkedIn</Link>
+              <a href="https://linkedin.com">LinkedIn</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="https://instagram.com">Instagram</Link>
+              <a href="https://instagram.com">Instagram</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <Link href="https://twitter.com">Twitter</Link>
+              <a href="https://twitter.com">Twitter</a>
             </li>
           </ul>
         </div>
@@ -101,14 +100,14 @@ export default function Home() {
           opacity: sidebarOpen ? 0.5 : 1,
         }}
         transition={{ type: "tween", duration: 0.5 }}
-        className="p-8"
+        className="p-8 pb-8 md:pb-0"
       >
         {/* Replace with your main content */}
         <div className="pt-16">
-          <div className="bg-gray-800 rounded-lg shadow-lg p-8 flex items-center">
+          <div className="bg-gray-800 rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
             {/* Left Section: Profile Image */}
-            <div className="w-1/2 pr-8">
-              <div className="relative w-full h-full rounded-lg overflow-hidden">
+            <div className="md:w-1/2 py-4 pr-8">
+              <div className="relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-50px] translate-y-[-100px]">
                 <Image
                   src="/samir.jpg"
                   alt="Profile"
@@ -121,7 +120,7 @@ export default function Home() {
             </div>
 
             {/* Right Section: Details */}
-            <div className="w-1/2 pl-8">
+            <div className="md:w-1/2 pl-8">
               <h1 className="text-4xl font-bold mb-4">Samir Bhattarai</h1>
               <h2 className="text-xl text-gray-400 mb-6">
                 Computer Engineering and Mathematics
@@ -148,13 +147,13 @@ export default function Home() {
               {/* Social Media Icons */}
               <div className="flex items-center mt-6 space-x-4">
                 <a href="#" className="text-yellow-500">
-                  <i className="fab fa-twitter"></i>
+                  <i className="fab fa-twitter"></i>Twitter
                 </a>
                 <a href="#" className="text-yellow-500">
-                  <i className="fab fa-facebook"></i>
+                  <i className="fab fa-facebook"></i>Facebook
                 </a>
                 <a href="#" className="text-yellow-500">
-                  <i className="fab fa-instagram"></i>
+                  <i className="fab fa-instagram"></i>Instagram
                 </a>
               </div>
             </div>
