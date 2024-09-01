@@ -213,7 +213,7 @@ export default function Home() {
               {/* Add more images as needed */}
             </div>
           </div>
-
+          {/* Add more images as needed */}
           <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
           <div className="flex flex-row-reverse bg-blue">
             {/* Left Section: Project Description */}
