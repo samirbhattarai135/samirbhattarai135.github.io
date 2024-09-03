@@ -78,12 +78,7 @@ export default function Home() {
               <a href="/">Home</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a
-                href="#about"
-                onClick={(event) => scrollToSection(event, "about")}
-              >
-                About me
-              </a>
+              <a href="/">About me</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a
@@ -117,7 +112,9 @@ export default function Home() {
               </div>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <div>Chat GPT with Esp32</div>
+              <div onClick={(event) => scrollToSection(event, "esp32")}>
+                Esp32 TTS
+              </div>
             </li>
           </ul>
           <h2 className="text-2xl font-bold mt-8 mb-4">Follow me on</h2>
@@ -151,8 +148,8 @@ export default function Home() {
         {/* Replace with your main content */}
         <div className="pt-16">
           <div className="container-bio rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
-            <div className="md:w-1/2 pb-5">
-              <div className=" relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-0px] translate-y-[-120px]">
+            <div className="md:w-1/3 pb-5">
+              <div className=" relative w-full h-full rounded-lg overflow-hidden transform  ">
                 <Image
                   src="/samir.png"
                   alt="Profile"
@@ -164,6 +161,7 @@ export default function Home() {
               </div>
             </div>
             <div className="md:w-1/2 pl-8 z-[1000]">
+              <h2 className="text-xl ">Hey there! I'm</h2>
               <h1 className="text-4xl font-bold mb-4">Samir Bhattarai</h1>
               <h2 className="text-xl text-gray-400 mb-6">
                 Computer Engineering and Mathematics
@@ -310,7 +308,7 @@ export default function Home() {
         <div className="flex shadow-lg flex-wrap pb-10">
           {/* Left Section: Project Description */}
           <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
-            <h3 className="text-3xl font-bold mb-4" id="visionbot">
+            <h3 className="text-3xl font-bold mb-4" id="esp32">
               ESP32 TTS audio Streaming and Download Server
             </h3>
             <p className="text-lg mb-4 ">
