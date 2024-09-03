@@ -112,8 +112,8 @@ export default function Home() {
               </div>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <div onClick={(event) => scrollToSection(event, "esp32")}>
-                Esp32 TTS
+              <div onClick={(event) => scrollToSection(event, "0day")}>
+                Zero Day Classification
               </div>
             </li>
           </ul>
@@ -153,9 +153,8 @@ export default function Home() {
                 <Image
                   src="/samir.png"
                   alt="Profile"
-                  layout="responsive"
-                  width={100}
-                  height={100}
+                  width={500}
+                  height={500}
                   className="object-cover"
                 />
               </div>
@@ -220,42 +219,36 @@ export default function Home() {
               Vision Bot (2023)
             </h3>
             <p className="text-lg mb-4 ">
-              Vision Bot is an AI-powered, interactive, and user-friendly
-              platform designed to help creative professionals discover,
-              understand, and implement innovative design solutions.
+              Vision Bot is an autonomous robot utilizing the ESP32 camera
+              module and the YOLOv9 object detection model. The robot is capable
+              of detecting and avoiding obstacles in real-time by dynamically
+              adjusting its path.
             </p>
             <p className="text-lg mb-4 ">
-              The platform aims to provide creative professionals with a
-              comprehensive, accessible, and engaging platform to discover,
-              understand, and implement innovative design solutions.
+              The autonomous object detection and avoidance robot integrates an
+              ESP32 camera module to capture real-time video streams, enabling
+              it to detect obstacles in its environment. By utilizing the YOLOv9
+              object detection model, the robot can accurately identify objects
+              within its surroundings, which facilitates precise path planning.
+              Sophisticated algorithms are being implemented for dynamic
+              obstacle avoidance, allowing the robot to navigate autonomously in
+              complex, changing environments. Additionally, the robot
+              efficiently calculates optimal paths and adjusts its movements in
+              real-time by combining sensor data with object detection feedback.
             </p>
           </div>
           {/* Right Section: Project Images */}
           <div className="w-full md:w-1/2 overflow-y-auto h-96">
-            <Image
-              src="/kritisana/image1.jpeg"
-              alt="Project 1"
-              layout="responsive"
-              width={100}
-              height={60}
+            <video
+              loop
+              autoplay
+              width="100%"
+              height="auto"
               className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/kritisana/image2.png"
-              alt="Project 2"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/kritisana/image1.jpeg"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
+            >
+              <source src="/Vision_bot/video.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
         <div className=" flex flex-row-reverse pb-10">
@@ -263,23 +256,30 @@ export default function Home() {
           <section className="w-full md:w-1/2 pr-8 px-4 mb-8" id="kritisana">
             <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
             <p className="text-lg mb-4 ">
-              Lorem ipsum dolor sit amet, consectetur adip
+              E-commerce product Recommendation Engine
             </p>
             <p className="text-lg mb-4 ">
-              KritiSana is an online platform designed to help creative
-              professionals discover, understand, and implement innovative
-              design solutions.
+              KritiSana is an e-commerce recommendation engine tailored to
+              enhance user experience by providing personalized product
+              recommendations based on user interactions and historical data.
+              This project involved building a dynamic web application that
+              integrates multiple data sources, including user-uploaded data and
+              external databases, to generate insightful and personalized
+              product suggestions.
             </p>
             <p className="text-lg mb-4 ">
-              KritiSana aims to provide creative professionals with a
-              comprehensive, accessible, and engaging platform to discover,
-              understand, and implement innovative design solutions.
+              The application leverages various recommendation algorithms,
+              including collaborative filtering and content-based filtering, to
+              suggest products that are most relevant to users. Additionally,
+              the system categorizes products based on interactions such as
+              views, purchases, and clicks, allowing users to filter
+              recommendations by different time frames and interaction types.
             </p>
           </section>
           {/* Right Section: Project Images */}
           <div className="w-full md:w-1/2 overflow-y-auto h-96">
             <Image
-              src="/kritisana/image1.jpeg"
+              src="/kritisana/image0.png"
               alt="Project 1"
               layout="responsive"
               width={100}
@@ -295,7 +295,31 @@ export default function Home() {
               className="object-cover rounded-md mb-4"
             />
             <Image
-              src="/kritisana/image1.jpeg"
+              src="/kritisana/image3.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image4.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image5.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image6.png"
               alt="Project 3"
               layout="responsive"
               width={100}
@@ -303,6 +327,81 @@ export default function Home() {
               className="object-cover rounded-md mb-4"
             />
             {/* Add more images as needed */}
+          </div>
+        </div>
+        <div className="flex shadow-lg flex-wrap pb-10" id="0day">
+          {/* Left Section: Project Description */}
+          <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
+            <h3 className="text-3xl font-bold mb-4">
+              Classification of Zero-Day Exploitation Types
+            </h3>
+            <p className="text-lg mb-4 ">
+              This project focuses on the classification of zero-day
+              exploitation types using advanced machine learning techniques.
+              Leveraging a comprehensive cybersecurity dataset, we employed
+              neural networks to identify and categorize different types of
+              exploits. The project involved extensive feature engineering,
+              including the encoding of categorical variables and scaling of
+              features, to optimize the performance of the models.
+            </p>
+            <p className="text-lg mb-4 ">
+              Key aspects of the project included handling class imbalances,
+              tuning hyperparameters, and addressing potential overfitting
+              issues. The result is a model that achieves a high level of
+              accuracy in predicting exploitation types, with applications in
+              enhancing cybersecurity measures and threat detection.
+            </p>
+          </div>
+          {/* Right Section: Project Images */}
+          <div className="w-full md:w-1/2 overflow-y-auto h-96">
+            <Image
+              src="/0-day/image0.png"
+              alt="Project 1"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image3.png"
+              alt="Project 2"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image4.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image2.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image1.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image6.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
           </div>
         </div>
         <div className="flex shadow-lg flex-wrap pb-10">
@@ -335,7 +434,7 @@ export default function Home() {
           {/* Right Section: Project Images */}
           <div className="w-full md:w-1/2 overflow-y-auto h-96">
             <Image
-              src="/kritisana/image1.jpeg"
+              src="/0-day/image0.png"
               alt="Project 1"
               layout="responsive"
               width={100}
@@ -343,7 +442,7 @@ export default function Home() {
               className="object-cover rounded-md mb-4"
             />
             <Image
-              src="/kritisana/image2.png"
+              src="/0-day/image3.png"
               alt="Project 2"
               layout="responsive"
               width={100}
@@ -351,7 +450,31 @@ export default function Home() {
               className="object-cover rounded-md mb-4"
             />
             <Image
-              src="/kritisana/image1.jpeg"
+              src="/0-day/image4.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image2.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image1.png"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/0-day/image6.png"
               alt="Project 3"
               layout="responsive"
               width={100}
