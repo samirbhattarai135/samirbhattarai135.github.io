@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "/src/app/globals.css";
 
@@ -40,11 +40,14 @@ export default function Home() {
       >
         <div className="text-2xl font-bold">Samir</div>
         <div className="flex space-x-4">
-          <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
+          <a
+            className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white"
+            href="https://mail.google.com/mail/u/0/?ogbl#inbox?compose=GTvVlcSMVkzlNKsnWXrXnvfJRxLrRmcKPnLtpsTFHHKkxWDpjbCnkSMLsGtNcWXwNWxhZhSDdWLrT"
+          >
             GET IN TOUCH
-          </button>
+          </a>
           <button
-            className="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-700"
+            className="bg-gray-800 text-white px-6 py-2 rounded-full hover:bg-gray-700"
             onClick={() => setSidebarOpen(true)}
           >
             MENU
@@ -160,7 +163,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="md:w-1/2 pl-8 ">
+            <div className="md:w-1/2 pl-8 z-[1000]">
               <h1 className="text-4xl font-bold mb-4">Samir Bhattarai</h1>
               <h2 className="text-xl text-gray-400 mb-6">
                 Computer Engineering and Mathematics
@@ -188,17 +191,20 @@ export default function Home() {
               <div className="flex items-center mt-6 space-x-4">
                 <a
                   href="https://github.com/samirbhattarai135"
-                  className="text-yellow-500"
+                  className="text-yellow-500 hover:underline"
                 >
                   GitHub
                 </a>
                 <a
                   href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
-                  className="text-yellow-500"
+                  className="text-yellow-500 hover:underline"
                 >
                   LinkedIn
                 </a>
-                <a href="https://instagram.com" className="text-yellow-500">
+                <a
+                  href="https://instagram.com"
+                  className="text-yellow-500 hover:underline"
+                >
                   Instagram
                 </a>
               </div>
@@ -206,21 +212,21 @@ export default function Home() {
           </div>
         </div>
         {/* Projects Section */}
-        <h2 className="text-4xl font-bold mb-8 text-center py-10" id="projects">
+        <h2 className="text-4xl font-bold mb-8 text-center py-20" id="projects">
           Projects
         </h2>
-        <section className="flex flex-wrap">
+        <div className="flex shadow-lg flex-wrap pb-10">
           {/* Left Section: Project Description */}
           <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
             <h3 className="text-3xl font-bold mb-4" id="visionbot">
               Vision Bot (2023)
             </h3>
-            <p className="text-lg mb-4 text-gray-400">
+            <p className="text-lg mb-4 ">
               Vision Bot is an AI-powered, interactive, and user-friendly
               platform designed to help creative professionals discover,
               understand, and implement innovative design solutions.
             </p>
-            <p className="text-lg mb-4 text-gray-400">
+            <p className="text-lg mb-4 ">
               The platform aims to provide creative professionals with a
               comprehensive, accessible, and engaging platform to discover,
               understand, and implement innovative design solutions.
@@ -252,22 +258,21 @@ export default function Home() {
               height={60}
               className="object-cover rounded-md mb-4"
             />
-            {/* Add more images as needed */}
           </div>
-        </section>
-        <div className=" flex flex-row-reverse bg-blue">
-          {/* Left Section: Project Description */}
+        </div>
+        <div className=" flex flex-row-reverse pb-10">
+          {/* Right Section: Project Description */}
           <section className="w-full md:w-1/2 pr-8 px-4 mb-8" id="kritisana">
             <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
-            <p className="text-lg mb-4 text-gray-400">
+            <p className="text-lg mb-4 ">
               Lorem ipsum dolor sit amet, consectetur adip
             </p>
-            <p className="text-lg mb-4 text-gray-400">
+            <p className="text-lg mb-4 ">
               KritiSana is an online platform designed to help creative
               professionals discover, understand, and implement innovative
               design solutions.
             </p>
-            <p className="text-lg mb-4 text-gray-400">
+            <p className="text-lg mb-4 ">
               KritiSana aims to provide creative professionals with a
               comprehensive, accessible, and engaging platform to discover,
               understand, and implement innovative design solutions.
@@ -302,103 +307,159 @@ export default function Home() {
             {/* Add more images as needed */}
           </div>
         </div>
+        <div className="flex shadow-lg flex-wrap pb-10">
+          {/* Left Section: Project Description */}
+          <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
+            <h3 className="text-3xl font-bold mb-4" id="visionbot">
+              ESP32 TTS audio Streaming and Download Server
+            </h3>
+            <p className="text-lg mb-4 ">
+              This project leverages the capabilities of the ESP32
+              microcontroller to connect to the OpenAI Text-to-Speech (TTS) API,
+              convert text input into speech, and stream the audio to a
+              connected Bluetooth speaker. Additionally, the project includes a
+              web server that allows users to download the generated audio as an
+              MP3 file directly from the ESP32.
+            </p>
+            <p className="text-lg mb-4 ">
+              The ESP32 connects to a specified WiFi network, allowing it to
+              access the internet and communicate with the OpenAI API. he
+              project sends a text string to the OpenAI TTS API, which returns
+              an MP3 audio file. This file is stored on the ESP32's SPIFFS (SPI
+              Flash File System). The ESP32 streams the TTS-generated audio
+              directly to a Bluetooth speaker, making it ideal for real-time
+              playback. A simple web server is hosted on the ESP32, enabling
+              users to download the generated MP3 file. The server is accessible
+              via the ESP32's IP address, which is printed in the serial monitor
+              upon connection.
+            </p>
+          </div>
+          {/* Right Section: Project Images */}
+          <div className="w-full md:w-1/2 overflow-y-auto h-96">
+            <Image
+              src="/kritisana/image1.jpeg"
+              alt="Project 1"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image2.png"
+              alt="Project 2"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image1.jpeg"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+          </div>
+        </div>
 
-        <footer className="footer bg-black text-white py-12" id="footer">
-          <div className="container mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Sitemap */}
+        <footer className="footer text-white py-12" id="footer">
+          <div className="footer-div">
+            <div className="mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8 ">
+              {/* Sitemap */}
 
-            <div>
-              <h3 className="text-lg font-bold mb-4">Sitemap</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="home" className="hover:underline">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#about" className="hover:underline">
-                    About me
-                  </a>
-                </li>
-                <li>
-                  <a className="hover:underline">Projects</a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Follow me */}
-            <div>
-              <h3 className="text-lg font-bold mb-4">Follow me</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a
-                    href="https://github.com/samirbhattarai135"
-                    className="hover:underline"
-                  >
-                    Github
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
-                    className="hover:underline"
-                  >
-                    LinkedIn
-                  </a>
-                </li>
-                <li>
-                  <a href="https://instagram.com" className="hover:underline">
-                    Instagram
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Work With Me */}
-            <div>
-              <h3 className="text-lg font-bold mb-4">Work With Me:</h3>
-              <a
-                href="/samirbhattarai135@gmail.com"
-                className="hover:underline"
-              >
-                samirbhattarai135@gmail.com
-              </a>
-            </div>
-
-            {/* Additional Info */}
-            <div className="md:col-span-2 flex justify-between text-sm mt-8 md:mt-0">
               <div>
-                <p>Based in United States</p>
+                <h3 className="text-lg font-bold mb-4">Sitemap</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a href="home" className="hover:underline">
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#about" className="hover:underline">
+                      About me
+                    </a>
+                  </li>
+                  <li>
+                    <a className="hover:underline">Projects</a>
+                  </li>
+                </ul>
               </div>
+
+              {/* Follow me */}
               <div>
-                <p>Availability</p>
-                <p>Currently available for part-time</p>
+                <h3 className="text-lg font-bold mb-4">Follow me</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <a
+                      href="https://github.com/samirbhattarai135"
+                      className="hover:underline"
+                    >
+                      Github
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
+                      className="hover:underline"
+                    >
+                      LinkedIn
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://instagram.com" className="hover:underline">
+                      Instagram
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Work With Me */}
+              <div>
+                <h3 className="text-lg font-bold mb-4">Work With Me:</h3>
+                <a
+                  href="https://mail.google.com/mail/u/0/?ogbl#inbox?compose=GTvVlcSMVkzlNKsnWXrXnvfJRxLrRmcKPnLtpsTFHHKkxWDpjbCnkSMLsGtNcWXwNWxhZhSDdWLrT"
+                  className="hover:underline"
+                >
+                  samirbhattarai135@gmail.com
+                </a>
+              </div>
+
+              {/* Additional Info */}
+              <div className="md:col-span-2 flex justify-between text-sm mt-8 md:mt-0">
+                <div>
+                  <p>Based in United States</p>
+                </div>
+                <div>
+                  <p>Currently available for part-time</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer Bottom */}
+            <div className="container mx-auto px-8 mt-12 flex justify-between items-center text-sm">
+              <div>&copy; 2024 - Samir Bhattarai All Rights Reserved</div>
+              <div>
+                <a href="#top" className="hover:underline">
+                  <span className="text-xl">&uarr;</span> Back to Top
+                </a>
               </div>
             </div>
           </div>
-
-          {/* Footer Bottom */}
-          <div className="container mx-auto px-8 mt-12 flex justify-between items-center text-sm">
-            <div>&copy; 2024 - Samir Bhattarai All Rights Reserved</div>
-            <div>
-              <a href="#top" className="hover:underline">
-                <span className="text-xl">&uarr;</span> Back to Top
-              </a>
-            </div>
-          </div>
+          <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
         </footer>
-        <ul class="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
       </motion.div>
     </>
   );
