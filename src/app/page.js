@@ -78,19 +78,18 @@ export default function Home() {
               <a href="/projects/pricemonitor">Chat GPT with Esp32</a>
             </li>
           </ul>
-          <h2 className="text-2xl font-bold mt-8 mb-4">Follow Us</h2>
+          <h2 className="text-2xl font-bold mt-8 mb-4">Follow me on</h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="https://github.com">GitHub</a>
+              <a href="https://github.com/samirbhattarai135">GitHub</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="https://linkedin.com">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/">
+                LinkedIn
+              </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a href="https://instagram.com">Instagram</a>
-            </li>
-            <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="https://twitter.com">Twitter</a>
             </li>
           </ul>
         </div>
@@ -110,10 +109,10 @@ export default function Home() {
         {/* Replace with your main content */}
 
         <div className="pt-16">
-          <div className="bg-gray-800 rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
+          <div className="bg-gray-950 rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
             {/* Left Section: Profile Image */}
             <div className="md:w-1/2 py-4 pr-8">
-              <div className="relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-50px] translate-y-[-100px]">
+              <div className="relative w-full h-full rounded-lg overflow-hidden transform md:translate-x-[-50px] md:translate-y-[-100px]">
                 <Image
                   src="/samir.jpg"
                   alt="Profile"
@@ -152,14 +151,20 @@ export default function Home() {
               </div>
               {/* Social Media Icons */}
               <div className="flex items-center mt-6 space-x-4">
-                <a href="#" className="text-yellow-500">
-                  <i className="fab fa-twitter"></i>Twitter
+                <a
+                  href="https://github.com/samirbhattarai135"
+                  className="text-yellow-500"
+                >
+                  GitHub
                 </a>
-                <a href="#" className="text-yellow-500">
-                  <i className="fab fa-facebook"></i>Facebook
+                <a
+                  href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
+                  className="text-yellow-500"
+                >
+                  LinkedIn
                 </a>
-                <a href="#" className="text-yellow-500">
-                  <i className="fab fa-instagram"></i>Instagram
+                <a href="https://instagram.com" className="text-yellow-500">
+                  Instagram
                 </a>
               </div>
             </div>
