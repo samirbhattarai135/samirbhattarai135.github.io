@@ -2,13 +2,21 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import "/src/app/globals.css";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const scrollToProjects = (e) => {
+    e.preventDefault();
+    const projectsSection = document.getElementById("projects-section");
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <>
-      <div class="lines">
+      <div className="lines">
         <div class="line"></div>
         <div class="line"></div>
         <div class="line"></div>
@@ -38,9 +46,10 @@ export default function Home() {
         initial={{ x: "100%" }}
         animate={{ x: sidebarOpen ? 0 : "100%" }}
         transition={{ type: "tween", duration: 0.5 }}
-        className={`fixed top-0 right-0 w-3/4 max-w-md h-full bg-black text-white z-60 p-8 transform ${
+        className={`fixed top-0 right-0 w-3/4 max-w-md h-full  text-white z-[1000] p-8 transform ${
           sidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{ pointerEvents: sidebarOpen ? "auto" : "none" }}
       >
         <button
           className="text-white text-3xl absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full border border-white hover:bg-white hover:text-black"
@@ -58,7 +67,7 @@ export default function Home() {
               <a href="/about">About me</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/projects">Projects</a>
+              <div onClick={scrollToProjects}>Projects</div>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a href="/contact">Contact</a>
@@ -69,7 +78,7 @@ export default function Home() {
           </h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/projects/schumacher">Vision-Bot </a>
+              <a href="/projects/schumacher">Vision-Bot</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a href="/projects/snapserve">KritiSana</a>
@@ -109,12 +118,11 @@ export default function Home() {
         {/* Replace with your main content */}
 
         <div className="pt-16">
-          <div className="bg-gray-950 rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
-            {/* Left Section: Profile Image */}
-            <div className="md:w-1/2 py-4 pr-8">
-              <div className="relative w-full h-full rounded-lg overflow-hidden transform md:translate-x-[-50px] md:translate-y-[-100px]">
+          <div className=" rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
+            <div className="md:w-1/2  py-4 ">
+              <div className="relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-0px] translate-y-[-100px]">
                 <Image
-                  src="/samir.jpg"
+                  src="/samir.png"
                   alt="Profile"
                   layout="responsive"
                   width={100}
@@ -123,9 +131,7 @@ export default function Home() {
                 />
               </div>
             </div>
-
-            {/* Right Section: Details */}
-            <div className="md:w-1/2 pl-8">
+            <div className="md:w-1/2 pl-8 ">
               <h1 className="text-4xl font-bold mb-4">Samir Bhattarai</h1>
               <h2 className="text-xl text-gray-400 mb-6">
                 Computer Engineering and Mathematics
@@ -169,108 +175,195 @@ export default function Home() {
               </div>
             </div>
           </div>
-          {/* Projects Section */}
-          <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
-          <div className="flex flex-wrap">
-            {/* Left Section: Project Description */}
-            <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
-              <h3 className="text-3xl font-bold mb-4">Vision Bot (2023)</h3>
-              <p className="text-lg mb-4 text-gray-400">
-                Vision Bot is an AI-powered, interactive, and user-friendly
-                platform designed to help creative professionals discover,
-                understand, and implement innovative design solutions.
-              </p>
-              <p className="text-lg mb-4 text-gray-400">
-                The platform aims to provide creative professionals with a
-                comprehensive, accessible, and engaging platform to discover,
-                understand, and implement innovative design solutions.
-              </p>
-              <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
-                VISIT LIVE SITE
-              </button>
-            </div>
-            {/* Right Section: Project Images */}
-            <div className="w-full md:w-1/2 overflow-y-auto h-96">
-              <Image
-                src="/kritisana/image1.jpeg"
-                alt="Project 1"
-                layout="responsive"
-                width={100}
-                height={60}
-                className="object-cover rounded-md mb-4"
-              />
-              <Image
-                src="/kritisana/image2.png"
-                alt="Project 2"
-                layout="responsive"
-                width={100}
-                height={60}
-                className="object-cover rounded-md mb-4"
-              />
-              <Image
-                src="/kritisana/image1.jpeg"
-                alt="Project 3"
-                layout="responsive"
-                width={100}
-                height={60}
-                className="object-cover rounded-md mb-4"
-              />
-              {/* Add more images as needed */}
-            </div>
+        </div>
+        {/* Projects Section */}
+        <h2
+          className="text-4xl font-bold mb-8 text-center py-10"
+          id="projects-section"
+        >
+          Projects
+        </h2>
+        <div className="flex flex-wrap">
+          {/* Left Section: Project Description */}
+          <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
+            <h3 className="text-3xl font-bold mb-4">Vision Bot (2023)</h3>
+            <p className="text-lg mb-4 text-gray-400">
+              Vision Bot is an AI-powered, interactive, and user-friendly
+              platform designed to help creative professionals discover,
+              understand, and implement innovative design solutions.
+            </p>
+            <p className="text-lg mb-4 text-gray-400">
+              The platform aims to provide creative professionals with a
+              comprehensive, accessible, and engaging platform to discover,
+              understand, and implement innovative design solutions.
+            </p>
+            <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
+              VISIT LIVE SITE
+            </button>
           </div>
-          {/* Add more images as needed */}
-          <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
-          <div className="flex flex-row-reverse bg-blue">
-            {/* Left Section: Project Description */}
-            <div className="w-full md:w-1/2 pr-8 px-4 mb-8">
-              <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
-              <p className="text-lg mb-4 text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adip
-              </p>
-              <p className="text-lg mb-4 text-gray-400">
-                KritiSana is an online platform designed to help creative
-                professionals discover, understand, and implement innovative
-                design solutions.
-              </p>
-              <p className="text-lg mb-4 text-gray-400">
-                KritiSana aims to provide creative professionals with a
-                comprehensive, accessible, and engaging platform to discover,
-                understand, and implement innovative design solutions.
-              </p>
-              <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
-                VISIT LIVE SITE
-              </button>
-            </div>
-            {/* Right Section: Project Images */}
-            <div className="w-full md:w-1/2 overflow-y-auto h-96">
-              <Image
-                src="/kritisana/image1.jpeg"
-                alt="Project 1"
-                layout="responsive"
-                width={100}
-                height={60}
-                className="object-cover rounded-md mb-4"
-              />
-              <Image
-                src="/kritisana/image2.png"
-                alt="Project 2"
-                layout="responsive"
-                width={100}
-                height={60}
-                className="object-cover rounded-md mb-4"
-              />
-              <Image
-                src="/kritisana/image1.jpeg"
-                alt="Project 3"
-                layout="responsive"
-                width={100}
-                height={60}
-                className="object-cover rounded-md mb-4"
-              />
-              {/* Add more images as needed */}
-            </div>
+          {/* Right Section: Project Images */}
+          <div className="w-full md:w-1/2 overflow-y-auto h-96">
+            <Image
+              src="/kritisana/image1.jpeg"
+              alt="Project 1"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image2.png"
+              alt="Project 2"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image1.jpeg"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            {/* Add more images as needed */}
           </div>
         </div>
+        <div className="flex flex-row-reverse bg-blue">
+          {/* Left Section: Project Description */}
+          <div className="w-full md:w-1/2 pr-8 px-4 mb-8">
+            <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
+            <p className="text-lg mb-4 text-gray-400">
+              Lorem ipsum dolor sit amet, consectetur adip
+            </p>
+            <p className="text-lg mb-4 text-gray-400">
+              KritiSana is an online platform designed to help creative
+              professionals discover, understand, and implement innovative
+              design solutions.
+            </p>
+            <p className="text-lg mb-4 text-gray-400">
+              KritiSana aims to provide creative professionals with a
+              comprehensive, accessible, and engaging platform to discover,
+              understand, and implement innovative design solutions.
+            </p>
+            <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
+              VISIT LIVE SITE
+            </button>
+          </div>
+          {/* Right Section: Project Images */}
+          <div className="w-full md:w-1/2 overflow-y-auto h-96">
+            <Image
+              src="/kritisana/image1.jpeg"
+              alt="Project 1"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image2.png"
+              alt="Project 2"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            <Image
+              src="/kritisana/image1.jpeg"
+              alt="Project 3"
+              layout="responsive"
+              width={100}
+              height={60}
+              className="object-cover rounded-md mb-4"
+            />
+            {/* Add more images as needed */}
+          </div>
+        </div>
+
+        <footer className="bg-black text-white py-12">
+          <div className="container mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Sitemap */}
+
+            <div>
+              <h3 className="text-lg font-bold mb-4">Sitemap</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a href="home" className="hover:underline">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#about" className="hover:underline">
+                    About me
+                  </a>
+                </li>
+                <li>
+                  <a href="" className="hover:underline">
+                    Projects
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Follow me */}
+            <div>
+              <h3 className="text-lg font-bold mb-4">Follow me</h3>
+              <ul className="space-y-2">
+                <li>
+                  <a
+                    href="https://github.com/samirbhattarai135"
+                    className="hover:underline"
+                  >
+                    Github
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
+                    className="hover:underline"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li>
+                  <a href="https://instagram.com" className="hover:underline">
+                    Instagram
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Work With Me */}
+            <div>
+              <h3 className="text-lg font-bold mb-4">Work With Me:</h3>
+              <a href="samirbhattarai135@gmail.com" className="hover:underline">
+                samirbhattarai135@gmail.com
+              </a>
+            </div>
+
+            {/* Additional Info */}
+            <div className="md:col-span-2 flex justify-between text-sm mt-8 md:mt-0">
+              <div>
+                <p>Based in United States</p>
+              </div>
+              <div>
+                <p>Availability</p>
+                <p>Currently available for part-time</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Bottom */}
+          <div className="container mx-auto px-8 mt-12 flex justify-between items-center text-sm">
+            <div>&copy; 2024 - Samir Bhattarai All Rights Reserved</div>
+            <div>
+              <a href="#top" className="hover:underline">
+                <span className="text-xl">&uarr;</span> Back to Top
+              </a>
+            </div>
+          </div>
+        </footer>
       </motion.div>
     </>
   );
