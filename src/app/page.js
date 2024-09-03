@@ -31,6 +31,7 @@ export default function Home() {
         <div class="line"></div>
         <div class="line"></div>
       </div>
+
       {/* Navbar */}
       <nav
         className={`bg-transparent fixed top-0 left-0 w-full flex justify-between items-center py-4 px-8 z-50 transition-all duration-500 ${
@@ -92,7 +93,7 @@ export default function Home() {
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a
                 href="#contact"
-                onClick={(event) => scrollToSection(event, "contact")}
+                onClick={(event) => scrollToSection(event, "footer")}
               >
                 Contact
               </a>
@@ -146,9 +147,9 @@ export default function Home() {
       >
         {/* Replace with your main content */}
         <div className="pt-16">
-          <div className=" rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
-            <div className="md:w-1/2 bg-gray-900 pb-5">
-              <div className=" relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-0px] translate-y-[-100px]">
+          <div className="container-bio rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
+            <div className="md:w-1/2 pb-5">
+              <div className=" relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-0px] translate-y-[-120px]">
                 <Image
                   src="/samir.png"
                   alt="Profile"
@@ -224,9 +225,6 @@ export default function Home() {
               comprehensive, accessible, and engaging platform to discover,
               understand, and implement innovative design solutions.
             </p>
-            <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
-              VISIT LIVE SITE
-            </button>
           </div>
           {/* Right Section: Project Images */}
           <div className="w-full md:w-1/2 overflow-y-auto h-96">
@@ -257,7 +255,7 @@ export default function Home() {
             {/* Add more images as needed */}
           </div>
         </section>
-        <div className="flex flex-row-reverse bg-blue">
+        <div className=" flex flex-row-reverse bg-blue">
           {/* Left Section: Project Description */}
           <section className="w-full md:w-1/2 pr-8 px-4 mb-8" id="kritisana">
             <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
@@ -274,9 +272,6 @@ export default function Home() {
               comprehensive, accessible, and engaging platform to discover,
               understand, and implement innovative design solutions.
             </p>
-            <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
-              VISIT LIVE SITE
-            </button>
           </section>
           {/* Right Section: Project Images */}
           <div className="w-full md:w-1/2 overflow-y-auto h-96">
@@ -308,7 +303,7 @@ export default function Home() {
           </div>
         </div>
 
-        <footer className="bg-black text-white py-12">
+        <footer className="footer bg-black text-white py-12" id="footer">
           <div className="container mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Sitemap */}
 
@@ -362,7 +357,10 @@ export default function Home() {
             {/* Work With Me */}
             <div>
               <h3 className="text-lg font-bold mb-4">Work With Me:</h3>
-              <a href="samirbhattarai135@gmail.com" className="hover:underline">
+              <a
+                href="/samirbhattarai135@gmail.com"
+                className="hover:underline"
+              >
                 samirbhattarai135@gmail.com
               </a>
             </div>
@@ -389,6 +387,18 @@ export default function Home() {
             </div>
           </div>
         </footer>
+        <ul class="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
       </motion.div>
     </>
   );
