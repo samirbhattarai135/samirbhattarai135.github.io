@@ -6,11 +6,21 @@ import "/src/app/globals.css";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const scrollToProjects = (e) => {
-    e.preventDefault();
-    const projectsSection = document.getElementById("projects-section");
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: "smooth" });
+
+  const scrollToSection = (event, sectionId) => {
+    // Check if 'event' is an object and has preventDefault function
+    if (event && event.preventDefault) {
+      event.preventDefault(); // Prevent the default link behavior
+    } else {
+      console.warn("Invalid event object passed:", event);
+    }
+
+    const section = document.getElementById(sectionId);
+
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.warn("No section found with id:", sectionId);
     }
   };
 
@@ -64,13 +74,28 @@ export default function Home() {
               <a href="/">Home</a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/about">About me</a>
+              <a
+                href="#about"
+                onClick={(event) => scrollToSection(event, "about")}
+              >
+                About me
+              </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <div onClick={scrollToProjects}>Projects</div>
+              <a
+                href="#projects"
+                onClick={(event) => scrollToSection(event, "projects")}
+              >
+                Projects
+              </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/contact">Contact</a>
+              <a
+                href="#contact"
+                onClick={(event) => scrollToSection(event, "contact")}
+              >
+                Contact
+              </a>
             </li>
           </ul>
           <h2 className="text-2xl text-white font-bold mt-8 mb-4">
@@ -78,13 +103,17 @@ export default function Home() {
           </h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/projects/schumacher">Vision-Bot</a>
+              <div onClick={(event) => scrollToSection(event, "visionbot")}>
+                Vision Bot
+              </div>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/projects/snapserve">KritiSana</a>
+              <div onClick={(event) => scrollToSection(event, "kritisana")}>
+                KritiSana
+              </div>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/projects/pricemonitor">Chat GPT with Esp32</a>
+              <div>Chat GPT with Esp32</div>
             </li>
           </ul>
           <h2 className="text-2xl font-bold mt-8 mb-4">Follow me on</h2>
@@ -116,11 +145,10 @@ export default function Home() {
         className="p-8 pb-8 md:pb-0"
       >
         {/* Replace with your main content */}
-
         <div className="pt-16">
           <div className=" rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
-            <div className="md:w-1/2  py-4 ">
-              <div className="relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-0px] translate-y-[-100px]">
+            <div className="md:w-1/2 bg-gray-900 pb-5">
+              <div className=" relative w-full h-full rounded-lg overflow-hidden transform translate-x-[-0px] translate-y-[-100px]">
                 <Image
                   src="/samir.png"
                   alt="Profile"
@@ -177,16 +205,15 @@ export default function Home() {
           </div>
         </div>
         {/* Projects Section */}
-        <h2
-          className="text-4xl font-bold mb-8 text-center py-10"
-          id="projects-section"
-        >
+        <h2 className="text-4xl font-bold mb-8 text-center py-10" id="projects">
           Projects
         </h2>
-        <div className="flex flex-wrap">
+        <section className="flex flex-wrap">
           {/* Left Section: Project Description */}
           <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
-            <h3 className="text-3xl font-bold mb-4">Vision Bot (2023)</h3>
+            <h3 className="text-3xl font-bold mb-4" id="visionbot">
+              Vision Bot (2023)
+            </h3>
             <p className="text-lg mb-4 text-gray-400">
               Vision Bot is an AI-powered, interactive, and user-friendly
               platform designed to help creative professionals discover,
@@ -229,10 +256,10 @@ export default function Home() {
             />
             {/* Add more images as needed */}
           </div>
-        </div>
+        </section>
         <div className="flex flex-row-reverse bg-blue">
           {/* Left Section: Project Description */}
-          <div className="w-full md:w-1/2 pr-8 px-4 mb-8">
+          <section className="w-full md:w-1/2 pr-8 px-4 mb-8" id="kritisana">
             <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
             <p className="text-lg mb-4 text-gray-400">
               Lorem ipsum dolor sit amet, consectetur adip
@@ -250,7 +277,7 @@ export default function Home() {
             <button className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-200">
               VISIT LIVE SITE
             </button>
-          </div>
+          </section>
           {/* Right Section: Project Images */}
           <div className="w-full md:w-1/2 overflow-y-auto h-96">
             <Image
@@ -299,9 +326,7 @@ export default function Home() {
                   </a>
                 </li>
                 <li>
-                  <a href="" className="hover:underline">
-                    Projects
-                  </a>
+                  <a className="hover:underline">Projects</a>
                 </li>
               </ul>
             </div>
