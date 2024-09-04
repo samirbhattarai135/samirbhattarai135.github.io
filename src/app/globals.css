@@ -25,7 +25,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
+#projects {
+  position: relative; /* Make sure it's relative to stay on top of canvas */
+  z-index: 1; /* Ensure it stays on top of the canvas */
+  background-color: transparent; /* No background color */
+  padding: 100px 0; /* Add padding as needed */
+  color: #fff; /* Set text color for contrast */
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -119,43 +125,6 @@ body {
   background-color: rgba(255, 255, 255, 0.8);
 }
 .container-bio {
-  background-image: linear-gradient(
-      135deg,
-      transparent 0%,
-      transparent 50%,
-      rgba(159, 159, 159, 0.07) 50%,
-      rgba(159, 159, 159, 0.07) 77%,
-      transparent 77%,
-      transparent 100%
-    ),
-    linear-gradient(
-      90deg,
-      transparent 0%,
-      transparent 91%,
-      rgba(159, 159, 159, 0.07) 91%,
-      rgba(159, 159, 159, 0.07) 99%,
-      transparent 99%,
-      transparent 100%
-    ),
-    linear-gradient(
-      135deg,
-      transparent 0%,
-      transparent 24%,
-      rgba(159, 159, 159, 0.07) 24%,
-      rgba(159, 159, 159, 0.07) 63%,
-      transparent 63%,
-      transparent 100%
-    ),
-    linear-gradient(
-      0deg,
-      transparent 0%,
-      transparent 49%,
-      rgba(159, 159, 159, 0.07) 49%,
-      rgba(159, 159, 159, 0.07) 63%,
-      transparent 63%,
-      transparent 100%
-    ),
-    linear-gradient(90deg, rgb(0, 0, 0), rgb(0, 0, 0));
 }
 
 .footer {
@@ -277,5 +246,40 @@ body {
     transform: translateY(-1000px) rotate(720deg);
     opacity: 0;
     border-radius: 50%;
+  }
+}
+.large-header {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+  z-index: 1;
+}
+#large-header {
+  z-index: 0;
+}
+#demo-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Canvas stays behind the content */
+}
+
+.main {
+  position: relative;
+  z-index: 1; /* Content on top of the canvas */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure content is centered vertically */
+}
+
+@media only screen and (max-width: 768px) {
+  .demo-1 .main-title {
+    font-size: 3em;
   }
 }

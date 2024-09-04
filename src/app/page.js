@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "/src/app/globals.css";
+import { gsap } from "gsap";
+import { Circ } from "gsap/all";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -23,6 +25,208 @@ export default function Home() {
       console.warn("No section found with id:", sectionId);
     }
   };
+  useEffect(() => {
+    var width, height, largeHeader, canvas, ctx, points, target;
+    var animateHeader = true;
+
+    // Main
+    initHeader();
+    initAnimation();
+    addListeners();
+
+    function initHeader() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      target = { x: width, y: height };
+
+      largeHeader = document.getElementById("large-header");
+      largeHeader.style.height = height + "px";
+
+      canvas = document.getElementById("demo-canvas");
+      canvas.width = width; // Set canvas width and height to match the screen size
+      canvas.height = height;
+      ctx = canvas.getContext("2d");
+
+      // create points
+      points = [];
+      for (var x = 0; x < width; x = x + width / 20) {
+        for (var y = 0; y < height; y = y + height / 20) {
+          var px = x + (Math.random() * width) / 20;
+          var py = y + (Math.random() * height) / 20;
+          var p = { x: px, originX: px, y: py, originY: py };
+          points.push(p);
+        }
+      }
+
+      // for each point find the 5 closest points
+      for (var i = 0; i < points.length; i++) {
+        var closest = [];
+        var p1 = points[i];
+        for (var j = 0; j < points.length; j++) {
+          var p2 = points[j];
+          if (!(p1 == p2)) {
+            var placed = false;
+            for (var k = 0; k < 5; k++) {
+              if (!placed) {
+                if (closest[k] == undefined) {
+                  closest[k] = p2;
+                  placed = true;
+                }
+              }
+            }
+
+            for (var k = 0; k < 5; k++) {
+              if (!placed) {
+                if (getDistance(p1, p2) < getDistance(p1, closest[k])) {
+                  closest[k] = p2;
+                  placed = true;
+                }
+              }
+            }
+          }
+        }
+        p1.closest = closest;
+      }
+
+      // assign a circle to each point
+      for (var i in points) {
+        var c = new Circle(
+          points[i],
+          2 + Math.random() * 2,
+          "rgba(255,255,255,0.3)"
+        );
+        points[i].circle = c;
+      }
+    }
+
+    // Event handling
+    function addListeners() {
+      if (!("ontouchstart" in window)) {
+        window.addEventListener("mousemove", mouseMove);
+      }
+      window.addEventListener("scroll", scrollCheck);
+      window.addEventListener("resize", resize);
+    }
+
+    function mouseMove(e) {
+      var posx = 0; // Initialize posx
+      var posy = 0; // Initialize posy
+
+      if (e.pageX || e.pageY) {
+        posx = e.pageX;
+        posy = e.pageY;
+      } else if (e.clientX || e.clientY) {
+        posx =
+          e.clientX +
+          document.body.scrollLeft +
+          document.documentElement.scrollLeft;
+        posy =
+          e.clientY +
+          document.body.scrollTop +
+          document.documentElement.scrollTop;
+      }
+
+      target.x = posx;
+      target.y = posy;
+    }
+
+    function scrollCheck() {
+      if (document.body.scrollTop > height) animateHeader = false;
+      else animateHeader = true;
+    }
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      if (largeHeader) largeHeader.style.height = height + "px";
+      if (canvas) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+    }
+
+    // animation
+    function initAnimation() {
+      animate();
+      for (var i in points) {
+        shiftPoint(points[i]);
+      }
+    }
+
+    function animate() {
+      if (animateHeader && ctx) {
+        ctx.clearRect(0, 0, width, height);
+        for (var i in points) {
+          // detect points in range
+          if (Math.abs(getDistance(target, points[i])) < 4000) {
+            points[i].active = 0.3;
+            points[i].circle.active = 0.6;
+          } else if (Math.abs(getDistance(target, points[i])) < 20000) {
+            points[i].active = 0.1;
+            points[i].circle.active = 0.3;
+          } else if (Math.abs(getDistance(target, points[i])) < 40000) {
+            points[i].active = 0.02;
+            points[i].circle.active = 0.1;
+          } else {
+            points[i].active = 0;
+            points[i].circle.active = 0;
+          }
+
+          drawLines(points[i]);
+          points[i].circle.draw();
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function shiftPoint(p) {
+      gsap.to(p, {
+        duration: 1 + Math.random(),
+        x: p.originX - 50 + Math.random() * 100,
+        y: p.originY - 50 + Math.random() * 100,
+        ease: "circ.inOut",
+        onComplete: function () {
+          shiftPoint(p);
+        },
+      });
+    }
+
+    // Canvas manipulation
+    function drawLines(p) {
+      if (!p.active || !ctx) return;
+      for (var i in p.closest) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.closest[i].x, p.closest[i].y);
+        ctx.strokeStyle = "rgba(156,217,249," + p.active + ")";
+        ctx.stroke();
+      }
+    }
+
+    function Circle(pos, rad, color) {
+      var _this = this;
+
+      // constructor
+      (function () {
+        _this.pos = pos || null;
+        _this.radius = rad || null;
+        _this.color = color || null;
+      })();
+
+      this.draw = function () {
+        if (!_this.active || !ctx) return;
+        ctx.beginPath();
+        ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
+        ctx.fillStyle = "rgba(156,217,249," + _this.active + ")";
+        ctx.fill();
+      };
+    }
+
+    // Util
+    function getDistance(p1, p2) {
+      return Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2);
+    }
+  }, []);
 
   return (
     <>
@@ -145,344 +349,461 @@ export default function Home() {
         transition={{ type: "tween", duration: 0.5 }}
         className="p-8 pb-8 md:pb-0"
       >
-        {/* Replace with your main content */}
-        <div className="pt-16">
-          <div className="container-bio rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
-            <div className="md:w-1/3 pb-5">
-              <div className=" relative w-full h-full rounded-lg overflow-hidden transform  ">
+        <div id="large-header" class="large-header">
+          <canvas id="demo-canvas"></canvas>
+          <div className="main pt-16">
+            <div className="container-bio rounded-lg shadow-lg p-8 flex flex-col md:flex-row items-center relative">
+              <div className="md:w-1/3 pb-5">
+                <div className=" relative w-full h-full rounded-lg overflow-hidden transform  ">
+                  <Image
+                    src="/samir.png"
+                    alt="Profile"
+                    width={500}
+                    height={500}
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div className="md:w-1/2 pl-8 z-[1000]">
+                <h2 className="text-xl ">Hey there! I'm</h2>
+                <h1 className="text-4xl font-bold mb-4">Samir Bhattarai</h1>
+                <h2 className="text-xl text-gray-400 mb-6">
+                  Computer Engineering and Mathematics
+                </h2>
+                <p className="text-lg mb-6">
+                  Hey there! I'm a computer engineering student at the
+                  University of Southern Mississippi with a passion for crafting
+                  amazing software and hardware experiences. I am currently
+                  studying computer engineering with a mathematics minor to
+                  deepen my understanding of how to build sleek and efficient
+                  computer software and machines to make our daily experiences
+                  better.
+                </p>
+                <p>
+                  While I'm not busy coding you'll often find me soaking up
+                  inspiration from the world of technology. Whether it's
+                  exploring new robotics innovations, machine learning models
+                  from hugging face, or just learning to play guitar a bit
+                  better, I love bringing creativity into work.
+                </p>
+                <div className="flex items-center mt-4">
+                  {/* Signature Placeholder */}
+                  <div className="text-2xl italic">S. Bhattarai</div>
+                </div>
+                {/* Social Media Icons */}
+                <div className="flex items-center mt-6 space-x-4">
+                  <a
+                    href="https://github.com/samirbhattarai135"
+                    className="text-yellow-500 hover:underline"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
+                    className="text-yellow-500 hover:underline"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    className="text-yellow-500 hover:underline"
+                  >
+                    Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <section className="projects pt-16">
+            <h2 className="text-4xl font-bold mb-14 text-center" id="projects">
+              Projects
+            </h2>
+            <div className="flex flex-wrap pb-10">
+              {/* Left Section: Project Description */}
+              <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
+                <h3 className="text-3xl font-bold mb-4" id="visionbot">
+                  Vision Bot (2023)
+                </h3>
+                <p className="text-lg mb-4 ">
+                  Vision Bot is an autonomous robot utilizing the ESP32 camera
+                  module and the YOLOv9 object detection model. The robot is
+                  capable of detecting and avoiding obstacles in real-time by
+                  dynamically adjusting its path.
+                </p>
+                <p className="text-lg mb-4 ">
+                  The autonomous object detection and avoidance robot integrates
+                  an ESP32 camera module to capture real-time video streams,
+                  enabling it to detect obstacles in its environment. By
+                  utilizing the YOLOv9 object detection model, the robot can
+                  accurately identify objects within its surroundings, which
+                  facilitates precise path planning. Sophisticated algorithms
+                  are being implemented for dynamic obstacle avoidance, allowing
+                  the robot to navigate autonomously in complex, changing
+                  environments. Additionally, the robot efficiently calculates
+                  optimal paths and adjusts its movements in real-time by
+                  combining sensor data with object detection feedback.
+                </p>
+              </div>
+              {/* Right Section: Project Images */}
+              <div className="w-full md:w-1/2 overflow-y-auto h-96">
+                <video
+                  loop
+                  autoplay
+                  controls
+                  width="100%"
+                  height="auto"
+                  className="object-cover rounded-md mb-4"
+                >
+                  <source src="/Vision_bot/video.mov" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+            <div className=" flex flex-row-reverse pb-10">
+              {/* Right Section: Project Description */}
+              <section
+                className="w-full md:w-1/2 pr-8 px-4 mb-8"
+                id="kritisana"
+              >
+                <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
+                <p className="text-lg mb-4 ">
+                  E-commerce product Recommendation Engine
+                </p>
+                <p className="text-lg mb-4 ">
+                  KritiSana is an e-commerce recommendation engine tailored to
+                  enhance user experience by providing personalized product
+                  recommendations based on user interactions and historical
+                  data. This project involved building a dynamic web application
+                  that integrates multiple data sources, including user-uploaded
+                  data and external databases, to generate insightful and
+                  personalized product suggestions.
+                </p>
+                <p className="text-lg mb-4 ">
+                  The application leverages various recommendation algorithms,
+                  including collaborative filtering and content-based filtering,
+                  to suggest products that are most relevant to users.
+                  Additionally, the system categorizes products based on
+                  interactions such as views, purchases, and clicks, allowing
+                  users to filter recommendations by different time frames and
+                  interaction types.
+                </p>
+              </section>
+              {/* Right Section: Project Images */}
+              <div className="w-full md:w-1/2 overflow-y-auto h-96">
                 <Image
-                  src="/samir.png"
-                  alt="Profile"
-                  width={500}
-                  height={500}
-                  className="object-cover"
+                  src="/kritisana/image0.png"
+                  alt="Project 1"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/kritisana/image2.png"
+                  alt="Project 2"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/kritisana/image3.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/kritisana/image4.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/kritisana/image5.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/kritisana/image6.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                {/* Add more images as needed */}
+              </div>
+            </div>
+            <div className="flex shadow-lg flex-wrap pb-10" id="0day">
+              {/* Left Section: Project Description */}
+              <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
+                <h3 className="text-3xl font-bold mb-4">
+                  Classification of Zero-Day Exploitation Types
+                </h3>
+                <p className="text-lg mb-4 ">
+                  This project focuses on the classification of zero-day
+                  exploitation types using advanced machine learning techniques.
+                  Leveraging a comprehensive cybersecurity dataset, we employed
+                  neural networks to identify and categorize different types of
+                  exploits. The project involved extensive feature engineering,
+                  including the encoding of categorical variables and scaling of
+                  features, to optimize the performance of the models.
+                </p>
+                <p className="text-lg mb-4 ">
+                  Key aspects of the project included handling class imbalances,
+                  tuning hyperparameters, and addressing potential overfitting
+                  issues. The result is a model that achieves a high level of
+                  accuracy in predicting exploitation types, with applications
+                  in enhancing cybersecurity measures and threat detection.
+                </p>
+              </div>
+              {/* Right Section: Project Images */}
+              <div className="w-full md:w-1/2 overflow-y-auto h-96">
+                <Image
+                  src="/0-day/image0.png"
+                  alt="Project 1"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image3.png"
+                  alt="Project 2"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image4.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image2.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image1.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image6.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
                 />
               </div>
             </div>
-            <div className="md:w-1/2 pl-8 z-[1000]">
-              <h2 className="text-xl ">Hey there! I'm</h2>
-              <h1 className="text-4xl font-bold mb-4">Samir Bhattarai</h1>
-              <h2 className="text-xl text-gray-400 mb-6">
-                Computer Engineering and Mathematics
-              </h2>
-              <p className="text-lg mb-6">
-                Hey there! I'm a computer engineering student at the University
-                of Southern Mississippi with a passion for crafting amazing
-                software and hardware experiences. I am currently studying
-                computer engineering with a mathematics minor to deepen my
-                understanding of how to build sleek and efficient computer
-                software and machines to make our daily experiences better.
-              </p>
-              <p>
-                While I'm not busy coding you'll often find me soaking up
-                inspiration from the world of technology. Whether it's exploring
-                new robotics innovations, machine learning models from hugging
-                face, or just learning to play guitar a bit better, I love
-                bringing creativity into work.
-              </p>
-              <div className="flex items-center mt-4">
-                {/* Signature Placeholder */}
-                <div className="text-2xl italic">S. Bhattarai</div>
+            <div className="flex shadow-lg flex-wrap pb-10">
+              {/* Left Section: Project Description */}
+              <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
+                <h3 className="text-3xl font-bold mb-4" id="esp32">
+                  ESP32 TTS audio Streaming and Download Server
+                </h3>
+                <p className="text-lg mb-4 ">
+                  This project leverages the capabilities of the ESP32
+                  microcontroller to connect to the OpenAI Text-to-Speech (TTS)
+                  API, convert text input into speech, and stream the audio to a
+                  connected Bluetooth speaker. Additionally, the project
+                  includes a web server that allows users to download the
+                  generated audio as an MP3 file directly from the ESP32.
+                </p>
+                <p className="text-lg mb-4 ">
+                  The ESP32 connects to a specified WiFi network, allowing it to
+                  access the internet and communicate with the OpenAI API. he
+                  project sends a text string to the OpenAI TTS API, which
+                  returns an MP3 audio file. This file is stored on the ESP32's
+                  SPIFFS (SPI Flash File System). The ESP32 streams the
+                  TTS-generated audio directly to a Bluetooth speaker, making it
+                  ideal for real-time playback. A simple web server is hosted on
+                  the ESP32, enabling users to download the generated MP3 file.
+                  The server is accessible via the ESP32's IP address, which is
+                  printed in the serial monitor upon connection.
+                </p>
               </div>
-              {/* Social Media Icons */}
-              <div className="flex items-center mt-6 space-x-4">
-                <a
-                  href="https://github.com/samirbhattarai135"
-                  className="text-yellow-500 hover:underline"
-                >
-                  GitHub
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
-                  className="text-yellow-500 hover:underline"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="https://instagram.com"
-                  className="text-yellow-500 hover:underline"
-                >
-                  Instagram
-                </a>
+              {/* Right Section: Project Images */}
+              <div className="w-full md:w-1/2 overflow-y-auto h-96">
+                <Image
+                  src="/0-day/image0.png"
+                  alt="Project 1"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image3.png"
+                  alt="Project 2"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image4.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image2.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image1.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
+                <Image
+                  src="/0-day/image6.png"
+                  alt="Project 3"
+                  layout="responsive"
+                  width={100}
+                  height={60}
+                  className="object-cover rounded-md mb-4"
+                />
               </div>
             </div>
-          </div>
+            <div class="more-products">
+              <div class="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-15 lg:max-w-7xl lg:px-8">
+                <h2 class="text-2xl font-bold tracking-tight text-center">
+                  More Projects to checkout
+                </h2>
+
+                <div class=" mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                  <div class="group relative">
+                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                      <Image
+                        src="/kritisana/image0.png"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        width={100}
+                        height={100}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      ></Image>
+                    </div>
+                    <div class="mt-4 flex justify-between">
+                      <div>
+                        <h3 class="text-sm">
+                          <a href="#">
+                            <span
+                              aria-hidden="true"
+                              class="absolute inset-0"
+                            ></span>
+                            Esp32 TTS Audio Streaming and Download Server
+                          </a>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group relative">
+                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                      <Image
+                        src="/kritisana/image0.png"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        width={100}
+                        height={100}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      ></Image>
+                    </div>
+                    <div class="mt-4 flex justify-between">
+                      <div>
+                        <h3 class="text-sm">
+                          <a href="#">
+                            <span
+                              aria-hidden="true"
+                              class="absolute inset-0"
+                            ></span>
+                            Esp32 TTS Audio Streaming and Download Server
+                          </a>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group relative">
+                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                      <Image
+                        src="/kritisana/image0.png"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        width={100}
+                        height={100}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      ></Image>
+                    </div>
+                    <div class="mt-4 flex justify-between">
+                      <div>
+                        <h3 class="text-sm">
+                          <a href="#">
+                            <span
+                              aria-hidden="true"
+                              class="absolute inset-0"
+                            ></span>
+                            Esp32 TTS Audio Streaming and Download Server
+                          </a>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="group relative">
+                    <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                      <Image
+                        src="/kritisana/image0.png"
+                        alt="Front of men&#039;s Basic Tee in black."
+                        width={100}
+                        height={100}
+                        className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                      ></Image>
+                    </div>
+                    <div class="mt-4 flex justify-between">
+                      <div>
+                        <h3 class="text-sm">
+                          <a href="#">
+                            <span
+                              aria-hidden="true"
+                              class="absolute inset-0"
+                            ></span>
+                            Esp32 TTS Audio Streaming and Download Server
+                          </a>
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
         {/* Projects Section */}
-        <h2 className="text-4xl font-bold mb-8 text-center py-20" id="projects">
-          Projects
-        </h2>
-        <div className="flex shadow-lg flex-wrap pb-10">
-          {/* Left Section: Project Description */}
-          <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
-            <h3 className="text-3xl font-bold mb-4" id="visionbot">
-              Vision Bot (2023)
-            </h3>
-            <p className="text-lg mb-4 ">
-              Vision Bot is an autonomous robot utilizing the ESP32 camera
-              module and the YOLOv9 object detection model. The robot is capable
-              of detecting and avoiding obstacles in real-time by dynamically
-              adjusting its path.
-            </p>
-            <p className="text-lg mb-4 ">
-              The autonomous object detection and avoidance robot integrates an
-              ESP32 camera module to capture real-time video streams, enabling
-              it to detect obstacles in its environment. By utilizing the YOLOv9
-              object detection model, the robot can accurately identify objects
-              within its surroundings, which facilitates precise path planning.
-              Sophisticated algorithms are being implemented for dynamic
-              obstacle avoidance, allowing the robot to navigate autonomously in
-              complex, changing environments. Additionally, the robot
-              efficiently calculates optimal paths and adjusts its movements in
-              real-time by combining sensor data with object detection feedback.
-            </p>
-          </div>
-          {/* Right Section: Project Images */}
-          <div className="w-full md:w-1/2 overflow-y-auto h-96">
-            <video
-              loop
-              autoplay
-              width="100%"
-              height="auto"
-              className="object-cover rounded-md mb-4"
-            >
-              <source src="/Vision_bot/video.mov" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-        <div className=" flex flex-row-reverse pb-10">
-          {/* Right Section: Project Description */}
-          <section className="w-full md:w-1/2 pr-8 px-4 mb-8" id="kritisana">
-            <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
-            <p className="text-lg mb-4 ">
-              E-commerce product Recommendation Engine
-            </p>
-            <p className="text-lg mb-4 ">
-              KritiSana is an e-commerce recommendation engine tailored to
-              enhance user experience by providing personalized product
-              recommendations based on user interactions and historical data.
-              This project involved building a dynamic web application that
-              integrates multiple data sources, including user-uploaded data and
-              external databases, to generate insightful and personalized
-              product suggestions.
-            </p>
-            <p className="text-lg mb-4 ">
-              The application leverages various recommendation algorithms,
-              including collaborative filtering and content-based filtering, to
-              suggest products that are most relevant to users. Additionally,
-              the system categorizes products based on interactions such as
-              views, purchases, and clicks, allowing users to filter
-              recommendations by different time frames and interaction types.
-            </p>
-          </section>
-          {/* Right Section: Project Images */}
-          <div className="w-full md:w-1/2 overflow-y-auto h-96">
-            <Image
-              src="/kritisana/image0.png"
-              alt="Project 1"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/kritisana/image2.png"
-              alt="Project 2"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/kritisana/image3.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/kritisana/image4.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/kritisana/image5.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/kritisana/image6.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            {/* Add more images as needed */}
-          </div>
-        </div>
-        <div className="flex shadow-lg flex-wrap pb-10" id="0day">
-          {/* Left Section: Project Description */}
-          <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
-            <h3 className="text-3xl font-bold mb-4">
-              Classification of Zero-Day Exploitation Types
-            </h3>
-            <p className="text-lg mb-4 ">
-              This project focuses on the classification of zero-day
-              exploitation types using advanced machine learning techniques.
-              Leveraging a comprehensive cybersecurity dataset, we employed
-              neural networks to identify and categorize different types of
-              exploits. The project involved extensive feature engineering,
-              including the encoding of categorical variables and scaling of
-              features, to optimize the performance of the models.
-            </p>
-            <p className="text-lg mb-4 ">
-              Key aspects of the project included handling class imbalances,
-              tuning hyperparameters, and addressing potential overfitting
-              issues. The result is a model that achieves a high level of
-              accuracy in predicting exploitation types, with applications in
-              enhancing cybersecurity measures and threat detection.
-            </p>
-          </div>
-          {/* Right Section: Project Images */}
-          <div className="w-full md:w-1/2 overflow-y-auto h-96">
-            <Image
-              src="/0-day/image0.png"
-              alt="Project 1"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image3.png"
-              alt="Project 2"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image4.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image2.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image1.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image6.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-          </div>
-        </div>
-        <div className="flex shadow-lg flex-wrap pb-10">
-          {/* Left Section: Project Description */}
-          <div className="w-full md:w-1/2 pr-8 mb-8 sticky top-0">
-            <h3 className="text-3xl font-bold mb-4" id="esp32">
-              ESP32 TTS audio Streaming and Download Server
-            </h3>
-            <p className="text-lg mb-4 ">
-              This project leverages the capabilities of the ESP32
-              microcontroller to connect to the OpenAI Text-to-Speech (TTS) API,
-              convert text input into speech, and stream the audio to a
-              connected Bluetooth speaker. Additionally, the project includes a
-              web server that allows users to download the generated audio as an
-              MP3 file directly from the ESP32.
-            </p>
-            <p className="text-lg mb-4 ">
-              The ESP32 connects to a specified WiFi network, allowing it to
-              access the internet and communicate with the OpenAI API. he
-              project sends a text string to the OpenAI TTS API, which returns
-              an MP3 audio file. This file is stored on the ESP32's SPIFFS (SPI
-              Flash File System). The ESP32 streams the TTS-generated audio
-              directly to a Bluetooth speaker, making it ideal for real-time
-              playback. A simple web server is hosted on the ESP32, enabling
-              users to download the generated MP3 file. The server is accessible
-              via the ESP32's IP address, which is printed in the serial monitor
-              upon connection.
-            </p>
-          </div>
-          {/* Right Section: Project Images */}
-          <div className="w-full md:w-1/2 overflow-y-auto h-96">
-            <Image
-              src="/0-day/image0.png"
-              alt="Project 1"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image3.png"
-              alt="Project 2"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image4.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image2.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image1.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-            <Image
-              src="/0-day/image6.png"
-              alt="Project 3"
-              layout="responsive"
-              width={100}
-              height={60}
-              className="object-cover rounded-md mb-4"
-            />
-          </div>
-        </div>
 
         <footer className="footer text-white py-12" id="footer">
           <div className="footer-div">
