@@ -10,9 +10,8 @@ export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const scrollToSection = (event, sectionId) => {
-    // Check if 'event' is an object and has preventDefault function
     if (event && event.preventDefault) {
-      event.preventDefault(); // Prevent the default link behavior
+      event.preventDefault();
     } else {
       console.warn("Invalid event object passed:", event);
     }
@@ -25,6 +24,14 @@ export default function Home() {
       console.warn("No section found with id:", sectionId);
     }
   };
+
+  const [isResumeVisible, setIsResumeVisible] = useState(false);
+
+  // Function to toggle resume visibility
+  const toggleResumeVisibility = () => {
+    setIsResumeVisible(!isResumeVisible);
+  };
+
   useEffect(() => {
     var width, height, largeHeader, canvas, ctx, points, target;
     var animateHeader = true;
@@ -42,7 +49,7 @@ export default function Home() {
       largeHeader = document.getElementById("large-header");
       if (largeHeader) {
         // Set height only if the element is found
-        const height = window.innerHeight; // Use window height as an example
+        const height = window.innerHeight;
         largeHeader.style.height = height + "px";
       } else {
         console.warn("Element with id 'large-header' not found.");
@@ -257,10 +264,19 @@ export default function Home() {
         <a href="/" className="text-2xl font-bold">
           Samir
         </a>
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          onClick={toggleResumeVisibility}
+          className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white"
+        >
+          Resume
+        </a>
+
         <div className="flex space-x-4">
           <a
-            className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white"
-            href="https://mail.google.com/mail/u/0/?ogbl#inbox?compose=GTvVlcSMVkzlNKsnWXrXnvfJRxLrRmcKPnLtpsTFHHKkxWDpjbCnkSMLsGtNcWXwNWxhZhSDdWLrT"
+            className="hidden md:inline-block bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white"
+            href="mailto:samirbhattarai135@gmail.com"
           >
             GET IN TOUCH
           </a>
@@ -309,6 +325,16 @@ export default function Home() {
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a href="" onClick={(event) => scrollToSection(event, "footer")}>
                 Contact
+              </a>
+            </li>
+            <li>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                onClick={toggleResumeVisibility}
+                className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg"
+              >
+                Resume
               </a>
             </li>
           </ul>
@@ -378,7 +404,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className="md:w-1/2 pl-8 z-[1000]">
+              <div className="md:w-1/2 md:pl-4 z-[1000]">
                 <h2 className="text-xl ">Hey there! I'm</h2>
                 <h1 className="text-4xl font-bold mb-4">Samir Bhattarai</h1>
                 <h2 className="text-xl text-gray-400 mb-6">
@@ -433,10 +459,10 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center" id="projects">
           Projects
         </h2>
-        <div className="relative flex flex-wrap px-5 py-5 md:w-full py-10 lg:w-full lg:items-start z-10">
+        <div className="relative flex flex-wrap px-3 py-5 md:w-full py-10 lg:w-full lg:items-start z-10">
           {/* Left Section: Project Description */}
           <div
-            className="text-section w-full md:w-1/2 p-12 md:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
+            className="text-section w-full md:w-1/2 md:p-12 md:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
             id="visionbot"
           >
             <h3 className="text-3xl font-bold mb-4">Vision Bot (2023)</h3>
@@ -498,7 +524,7 @@ export default function Home() {
         <div className="relative flex flex-wrap flex-row-reverse px-5 py-5 md:w-full py-10 lg:w-full lg:items-start">
           {/* Right Section: Project Description */}
           <div
-            className="text-section w-full md:sticky md:w-1/2 p-12 lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
+            className="text-section w-full md:sticky md:w-1/2 md:p-12 lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
             id="kritisana"
           >
             <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
@@ -583,7 +609,7 @@ export default function Home() {
           id="0day"
         >
           {/* Right Section: Project Description */}
-          <div className="text-section w-full md:sticky md:w-1/2 p-12 lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+          <div className="text-section w-full md:sticky md:w-1/2 md:p-12 lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
             <h3 className="text-3xl font-bold mb-4">
               Classification of Zero-Day Exploitation Types
             </h3>
@@ -838,7 +864,7 @@ export default function Home() {
               <div>
                 <h3 className="text-lg font-bold mb-4">Work With Me:</h3>
                 <a
-                  href="https://mail.google.com/mail/u/0/?ogbl#inbox?compose=GTvVlcSMVkzlNKsnWXrXnvfJRxLrRmcKPnLtpsTFHHKkxWDpjbCnkSMLsGtNcWXwNWxhZhSDdWLrT"
+                  href="mailto:samirbhattarai135@gmail.com"
                   className="hover:underline"
                 >
                   samirbhattarai135@gmail.com

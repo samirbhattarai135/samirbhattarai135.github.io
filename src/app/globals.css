@@ -25,18 +25,25 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
-@media (min-width: 700px) {
-  #kritisana {
-    position: sticky;
-    top: 2rem;
-  }
+.resume-section {
+  padding: 50px 0;
+  background-color: #f9f9f9;
 }
 
-@media (max-width: 700px) {
-  #kritisana {
-    position: relative; /* On smaller screens, disable sticky to allow normal flow */
-  }
+.resume-section h2 {
+  font-size: 2rem;
+}
+
+.resume-section a {
+  background-color: #1d4ed8;
+  padding: 12px 24px;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.resume-section a:hover {
+  background-color: #1e40af;
 }
 
 @layer utilities {
