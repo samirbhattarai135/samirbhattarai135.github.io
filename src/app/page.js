@@ -253,9 +253,9 @@ export default function Home() {
         <div class="line"></div>
         <div class="line"></div>
       </div>
+      <link rel="icon" type="image/png" href="/favicon.png" />
 
       {/* Navbar */}
-
       <nav
         className={`bg-transparent fixed top-0 left-0 w-full flex justify-between items-center py-4 px-8 z-50 transition-all duration-500 ${
           sidebarOpen ? "opacity-0 pointer-events-none" : "opacity-100"
