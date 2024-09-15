@@ -139,6 +139,7 @@ body {
 }
 
 .footer {
+  background: black;
   position: relative;
   overflow: hidden;
   z-index: 2;

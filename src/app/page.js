@@ -265,7 +265,7 @@ export default function Home() {
           Samir
         </a>
         <a
-          href="/resume.pdf"
+          href="/Samir_s_Resume.pdf"
           target="_blank"
           onClick={toggleResumeVisibility}
           className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white"
@@ -294,7 +294,7 @@ export default function Home() {
         initial={{ x: "100%" }}
         animate={{ x: sidebarOpen ? 0 : "100%" }}
         transition={{ type: "tween", duration: 0.5 }}
-        className={`fixed top-0 right-0 w-3/4 max-w-md h-full  text-white z-[1000] p-8 transform ${
+        className={`fixed top-0 right-0 w-3/4 max-w-md h-full bg-black  text-white z-[1000] p-8 transform ${
           sidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ pointerEvents: sidebarOpen ? "auto" : "none" }}
@@ -445,7 +445,7 @@ export default function Home() {
                     LinkedIn
                   </a>
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/saaammmiiirrrrr/"
                     className="text-yellow-500 hover:underline"
                   >
                     Instagram
@@ -457,7 +457,7 @@ export default function Home() {
         </div>
         {/* Projects Content */}
         <h2 className="text-4xl font-bold text-center" id="projects">
-          Projects
+          Selected Projects
         </h2>
         <div className="relative flex flex-wrap px-3 py-5 md:w-full py-10 lg:w-full lg:items-start z-10">
           {/* Left Section: Project Description */}
@@ -495,7 +495,7 @@ export default function Home() {
                 height="auto"
                 className="object-cover rounded-md "
               >
-                <source src="/Vision_bot/video.mov" type="video/mp4" />
+                <source src="/Vision_bot/video.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
               <Image
