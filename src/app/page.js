@@ -294,7 +294,7 @@ export default function Home() {
         initial={{ x: "100%" }}
         animate={{ x: sidebarOpen ? 0 : "100%" }}
         transition={{ type: "tween", duration: 0.5 }}
-        className={`fixed top-0 right-0 w-3/4 max-w-md h-full bg-black  text-white z-[1000] p-8 transform ${
+        className={`fixed top-0 right-0 w-3/4 max-w-md h-full  text-white z-[1000] p-8 transform ${
           sidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ pointerEvents: sidebarOpen ? "auto" : "none" }}
