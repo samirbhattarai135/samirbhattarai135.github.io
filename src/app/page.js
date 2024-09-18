@@ -511,7 +511,7 @@ export default function Home() {
                 height="auto"
                 className="object-cover rounded-md "
               >
-                <source src="/Vision_bot/video.mp4" type="video/mp4" />
+                <source src="/vision_bot/video.mov" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
