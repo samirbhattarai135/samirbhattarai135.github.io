@@ -487,17 +487,14 @@ export default function Home() {
           {/* Right Section: Project Video */}
           <div className="w-full md:w-1/2 lg:max-w-7xl lg:gap-x-8 lg:px-8 py-10 ">
             <div className="project-card bg-gray-700 shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 p-6">
-              <video
-                loop
-                autoPlay
-                muted
-                width="100%"
-                height="auto"
-                className="object-cover rounded-md "
-              >
-                <source src="/Vision_bot/video.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <Image
+                src="/vision_bot/image2.png"
+                alt="Project 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md my-4"
+              />
               <Image
                 src="/vision_bot/3Ddesign.jpg"
                 alt="Project 1"
@@ -514,7 +511,7 @@ export default function Home() {
                 height="auto"
                 className="object-cover rounded-md "
               >
-                <source src="/Vision_bot/video1.mov" type="video/mp4" />
+                <source src="/Vision_bot/video.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -561,7 +558,7 @@ export default function Home() {
                 className="object-cover rounded-md mb-4"
               />
               <Image
-                src="/kritisana/image2.png"
+                src="/kritisana/image3.png"
                 alt="Project 2"
                 layout="responsive"
                 width={100}
@@ -569,7 +566,7 @@ export default function Home() {
                 className="object-cover rounded-md mb-4"
               />
               <Image
-                src="/kritisana/image3.png"
+                src="/kritisana/image4.png"
                 alt="Project 3"
                 layout="responsive"
                 width={100}
@@ -577,7 +574,7 @@ export default function Home() {
                 className="object-cover rounded-md mb-4"
               />
               <Image
-                src="/kritisana/image4.png"
+                src="/kritisana/image5.png"
                 alt="Project 4"
                 layout="responsive"
                 width={100}
@@ -585,7 +582,7 @@ export default function Home() {
                 className="object-cover rounded-md mb-4"
               />
               <Image
-                src="/kritisana/image5.png"
+                src="/kritisana/image8.png"
                 alt="Project 5"
                 layout="responsive"
                 width={100}
@@ -594,6 +591,14 @@ export default function Home() {
               />
               <Image
                 src="/kritisana/image6.png"
+                alt="Project 6"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              <Image
+                src="/kritisana/image9.png"
                 alt="Project 6"
                 layout="responsive"
                 width={100}
@@ -695,11 +700,11 @@ export default function Home() {
               <div class="group relative">
                 <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <Image
-                    src="/kritisana/image0.png"
+                    src="/tts.png"
                     alt="Front of men&#039;s Basic Tee in black."
                     width={100}
                     height={100}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    className="w-full object-cover object-center lg:h-auto lg:w-full"
                   ></Image>
                 </div>
                 <div class="mt-4 flex justify-between">
