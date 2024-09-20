@@ -265,7 +265,7 @@ export default function Home() {
           Samir
         </a>
         <a
-          href="/Samir_s_Resume.pdf"
+          href="/Resume_Samir.pdf"
           target="_blank"
           onClick={toggleResumeVisibility}
           className="bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white"
@@ -329,7 +329,7 @@ export default function Home() {
             </li>
             <li>
               <a
-                href="/resume.pdf"
+                href="/Resume_Samir.pdf"
                 target="_blank"
                 onClick={toggleResumeVisibility}
                 className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg"
@@ -411,13 +411,12 @@ export default function Home() {
                   Computer Engineering and Mathematics
                 </h2>
                 <p className="text-lg mb-6">
-                  Hey there! I'm a computer engineering student at the
-                  University of Southern Mississippi with a passion for crafting
-                  amazing software and hardware experiences. I am currently
-                  studying computer engineering with a mathematics minor to
-                  deepen my understanding of how to build sleek and efficient
-                  computer software and machines to make our daily experiences
-                  better.
+                  I'm a computer engineering student at the University of
+                  Southern Mississippi with a passion for crafting amazing
+                  software and hardware experiences. I am currently studying
+                  computer engineering with a mathematics minor to deepen my
+                  understanding of how to build sleek and efficient computer
+                  software and machines to make our daily experiences better.
                 </p>
                 <p>
                   While I'm not busy coding you'll often find me soaking up

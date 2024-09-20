@@ -13,8 +13,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/samir/Documents/GitHub/C---projects/Snake_Game",
-      "program": "/Users/samir/Documents/GitHub/C---projects/Snake_Game/build/Debug/outDebug"
+      "cwd": "ss",
+      "program": "ss/build/Debug/outDebug"
     }
   ]
 }
