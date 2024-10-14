@@ -464,7 +464,7 @@ export default function Home() {
             className="text-section w-full md:w-1/2 md:p-12 md:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
             id="visionbot"
           >
-            <h3 className="text-3xl font-bold mb-4">Vision Bot (2023)</h3>
+            <h3 className="text-3xl font-bold mb-4">Vision Bot (2024)</h3>
             <p className="text-lg mb-4">
               Vision Bot is an autonomous robot utilizing the ESP32 camera
               module and the YOLOv9 object detection model. The robot is capable
@@ -523,7 +523,7 @@ export default function Home() {
             className="text-section w-full md:sticky md:w-1/2 md:p-12 lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
             id="kritisana"
           >
-            <h3 className="text-3xl font-bold mb-4"> KritiSana(2023)</h3>
+            <h3 className="text-3xl font-bold mb-4"> KritiSana(2024)</h3>
             <p className="text-lg mb-4 ">
               E-commerce product Recommendation Engine
             </p>

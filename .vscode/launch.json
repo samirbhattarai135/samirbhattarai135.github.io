@@ -13,8 +13,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "ss",
-      "program": "ss/build/Debug/outDebug"
+      "cwd": "/Users/samir/Downloads/zeus-car-main/Zeus_Car",
+      "program": "/Users/samir/Downloads/zeus-car-main/Zeus_Car/build/Debug/outDebug"
     }
   ]
 }
