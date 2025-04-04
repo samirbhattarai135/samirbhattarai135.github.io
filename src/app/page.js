@@ -464,6 +464,76 @@ export default function Home() {
             className="text-section w-full md:w-1/2 md:p-12 md:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
             id="visionbot"
           >
+            <h3 className="text-3xl font-bold mb-4">Southeast Con(2025)</h3>
+            <p className="text-lg mb-4">
+              SoutheastCon is the annual IEEE Region 3 Technical, Professional,
+              and Student Conference. SoutheastCon brings together Computer
+              Scientists, Electrical, and Computer Engineering professionals,
+              faculty and students to share the latest information through
+              technical sessions, tutorials, and exhibits.
+            </p>
+            <p className="text-lg mb-4">
+              Built an autonomous robot using Raspberry Pi, Arduino, Ardu Cam
+              for the Hardware Competition at IEEE SoutheastCon 2025. The robot
+              is
+            </p>
+          </div>
+
+          {/* Right Section: Project Video */}
+          <div className="w-full md:w-1/2 lg:max-w-7xl lg:gap-x-8 lg:px-8 py-10 ">
+            <div className="project-card bg-gray-700 shadow-lg rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 p-6">
+              <Image
+                src="/SoutheastCon_Bot/image2.png"
+                alt="Project 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md my-4"
+              />
+              <Image
+                src="/SoutheastCon_Bot/image0.png"
+                alt="Project 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md my-4"
+              />
+              <video
+                loop
+                autoPlay
+                muted
+                width="100%"
+                height="auto"
+                className="object-cover rounded-md "
+              >
+                <source src="/SoutheastCon_Bot/video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <Image
+                src="/SoutheastCon_Bot/image3.png"
+                alt="Project 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md my-4"
+              />
+              <Image
+                src="/SoutheastCon_Bot/image4.png"
+                alt="Project 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md my-4"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="relative flex flex-wrap px-3 py-5 md:w-full py-10 lg:w-full lg:items-start z-10">
+          {/* Left Section: Project Description */}
+          <div
+            className="text-section w-full md:w-1/2 md:p-12 md:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden"
+            id="visionbot"
+          >
             <h3 className="text-3xl font-bold mb-4">Vision Bot (2024)</h3>
             <p className="text-lg mb-4">
               Vision Bot is an autonomous robot utilizing the ESP32 camera
