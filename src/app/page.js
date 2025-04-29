@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import "/src/app/globals.css";
 import { gsap } from "gsap";
-import { Circ } from "gsap/all";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -335,6 +334,7 @@ export default function Home() {
           <a
             className="hidden md:inline-block animated-button bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white transition-all duration-300"
             href="mailto:samirbhattarai135@gmail.com"
+            target="_blank"
           >
             GET IN TOUCH
           </a>
@@ -367,10 +367,20 @@ export default function Home() {
           <h2 className="text-2xl font-bold mb-4">Go to</h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/">Home</a>
+              <a
+                href="#home"
+                onClick={(event) => scrollToSection(event, "aboutme")}
+              >
+                Home
+              </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="/">About me</a>
+              <a
+                href="#aboutme"
+                onClick={(event) => scrollToSection(event, "aboutme")}
+              >
+                About me
+              </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a
@@ -381,13 +391,17 @@ export default function Home() {
               </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="" onClick={(event) => scrollToSection(event, "footer")}>
+              <a
+                href=""
+                onClick={(event) => scrollToSection(event, "footer")}
+                target="_blank"
+              >
                 Contact
               </a>
             </li>
             <li>
               <a
-                href="/Resume_Samir.pdf"
+                href="/Recent_Resume.pdf"
                 target="_blank"
                 onClick={toggleResumeVisibility}
                 className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg"
@@ -401,8 +415,20 @@ export default function Home() {
           </h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <div onClick={(event) => scrollToSection(event, "visionbot")}>
-                Vision Bot
+              <div
+                onClick={(event) => scrollToSection(event, "souteastconBot")}
+              >
+                SoutheastCon Bot
+              </div>
+            </li>
+            <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
+              <div onClick={(event) => scrollToSection(event, "infolaya")}>
+                Infolaya
+              </div>
+            </li>
+            <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
+              <div onClick={(event) => scrollToSection(event, "visionBot")}>
+                Vsion Bot
               </div>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
@@ -410,24 +436,26 @@ export default function Home() {
                 KritiSana
               </div>
             </li>
-            <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <div onClick={(event) => scrollToSection(event, "0day")}>
-                Zero Day Classification
-              </div>
-            </li>
           </ul>
           <h2 className="text-2xl font-bold mt-8 mb-4">Follow me on</h2>
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="https://github.com/samirbhattarai135">GitHub</a>
+              <a href="https://github.com/samirbhattarai135" target="_blank">
+                GitHub
+              </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/">
+              <a
+                href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
+                target="_blank"
+              >
                 LinkedIn
               </a>
             </li>
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
-              <a href="https://www.instagram.com/saaammmiiirrrrr/">Instagram</a>
+              <a href="https://www.instagram.com/samirrr_135/" target="_blank">
+                Instagram
+              </a>
             </li>
           </ul>
         </div>
@@ -492,6 +520,7 @@ export default function Home() {
                   <a
                     href="https://github.com/samirbhattarai135"
                     className="group flex items-center space-x-2 text-white hover:text-gray-300 transition-colors duration-300"
+                    target="_blank"
                   >
                     <div className="bg-gray-800 p-2 rounded-full group-hover:bg-gray-700 transition-colors duration-300">
                       <svg
@@ -507,6 +536,7 @@ export default function Home() {
                   </a>
                   <a
                     href="https://www.linkedin.com/in/samir-bhattarai-1640011a7/"
+                    target="_blank"
                     className="group flex items-center space-x-2 text-white hover:text-gray-300 transition-colors duration-300"
                   >
                     <div className="bg-gray-800 p-2 rounded-full group-hover:bg-gray-700 transition-colors duration-300">
@@ -522,7 +552,8 @@ export default function Home() {
                     <span className="hidden md:inline">LinkedIn</span>
                   </a>
                   <a
-                    href="https://www.instagram.com/saaammmiiirrrrr/"
+                    href="https://www.instagram.com/samirrr_135/"
+                    target="_blank"
                     className="group flex items-center space-x-2 text-white hover:text-gray-300 transition-colors duration-300"
                   >
                     <div className="bg-gray-800 p-2 rounded-full group-hover:bg-gray-700 transition-colors duration-300">
@@ -553,14 +584,14 @@ export default function Home() {
           {/* Left Section: Project Description */}
           <div
             className="text-section w-full md:w-1/2 md:p-12 md:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden animate-on-scroll"
-            id="visionbot"
+            id="souteastconBot"
           >
             <h3 className="text-3xl font-bold mb-4">Southeast Con(2025)</h3>
-
             <p className="text-lg mb-4">
               Built an autonomous robot using Raspberry Pi, Arduino, Ardu Cam
               for the Hardware Competition at IEEE SoutheastCon 2025. The robot
-              is
+              is capable of detecting game pieces and avoiding obstacles in
+              real-time by dynamically adjusting its path.
             </p>
             <p className="text-lg mb-4">
               SoutheastCon is the annual IEEE Region 3 Technical, Professional,
@@ -620,11 +651,74 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="relative flex flex-wrap flex-row-reverse px-3 py-5 md:w-full py-10 lg:w-full lg:items-start z-10">
+
+        <div className="relative flex flex-wrap flex-row-reverse px-5 py-5 md:w-full py-10 lg:w-full lg:items-start">
+          {/* Right Section: Project Description */}
+          <div
+            className="text-section w-full md:sticky md:w-1/2 md:p-12 lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden animate-on-scroll"
+            id="infolaya"
+          >
+            <h3 className="text-3xl font-bold mb-4"> Infolaya(2025)</h3>
+            <p className="text-lg mb-4 ">
+              Zero Code Data Analysis and Visualization
+            </p>
+            <p className="text-lg mb-4 ">
+              Infolaya is an innovative web application designed to simplify
+              data analysis and visualization for users without programming
+              expertise. The platform allows users to upload datasets in various
+              formats, including CSV, Excel, Text, and JSON, and provides a
+              user-friendly interface for data exploration and visualization.
+              Users can easily create interactive charts, graphs, and dashboards
+              to gain insights from their data without writing a single line of
+              code.
+            </p>
+            <p className="text-lg mb-4 ">
+              The application supports a wide range of data visualization
+              options, including bar charts, line graphs, scatter plots, and
+              heatmaps. Users can customize their visualizations with various
+              filters and parameters to focus on specific aspects of their data.
+              Infolaya aims to empower users to make data-driven decisions by
+              providing an intuitive platform for data analysis and
+              visualization.
+            </p>
+          </div>
+          {/* Right Section: Project Images */}
+          <div className="w-full md:w-1/2 lg:max-w-7xl lg:gap-x-8 lg:px-8 py-10 animate-on-scroll animate-delay-1">
+            <div className="project-card bg-gray-700 shadow-lg rounded-lg overflow-hidden hover-scale transition-all duration-300 p-6">
+              <Image
+                src="/infolaya/image11.png"
+                alt="image 1"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              <Image
+                src="/infolaya/image12.png"
+                alt="Project 2"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+              <Image
+                src="/infolaya/image13.png"
+                alt="Project 3"
+                layout="responsive"
+                width={100}
+                height={60}
+                className="object-cover rounded-md mb-4"
+              />
+            </div>
+            {/* Add more images as needed */}
+          </div>
+        </div>
+
+        <div className="relative flex flex-wrap px-3 py-5 md:w-full py-10 lg:w-full lg:items-start z-10">
           {/* Left Section: Project Description */}
           <div
             className="text-section w-full md:w-1/2 md:p-12 md:sticky lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden animate-on-scroll"
-            id="southeastconBot"
+            id="visionBot"
           >
             <h3 className="text-3xl font-bold mb-4">Vision Bot (2024)</h3>
             <p className="text-lg mb-4">
@@ -679,7 +773,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="relative flex flex-wrap  px-5 py-5 md:w-full py-10 lg:w-full lg:items-start">
+        <div className="relative flex flex-wrap flex-row-reverse px-5 py-5 md:w-full py-10 lg:w-full lg:items-start">
           {/* Right Section: Project Description */}
           <div
             className="text-section w-full md:sticky md:w-1/2 md:p-12 lg:top-4 lg:row-span-2 lg:row-start-1 lg:overflow-hidden animate-on-scroll"
@@ -771,7 +865,7 @@ export default function Home() {
           </div>
         </div>
         <div
-          className="relative flex flex-wrap flex-row-reverse px-5 py-5 md:w-full py-10 lg:w-full lg:items-start animate-on-scroll animate-delay-1"
+          className="relative flex flex-wrap px-5 py-5 md:w-full py-10 lg:w-full lg:items-start animate-on-scroll animate-delay-1"
           id="0day"
         >
           {/* Right Section: Project Description */}
@@ -871,7 +965,10 @@ export default function Home() {
                 <div class="mt-4 flex justify-between">
                   <div>
                     <h3 class="text-sm">
-                      <a href="https://github.com/samirbhattarai135/Esp32-with-Chat-GPT">
+                      <a
+                        href="https://github.com/samirbhattarai135/Esp32-with-Chat-GPT"
+                        target="_blank"
+                      >
                         <span
                           aria-hidden="true"
                           class="absolute inset-0"
@@ -899,7 +996,10 @@ export default function Home() {
                 <div class="mt-4 flex justify-between">
                   <div>
                     <h3 class="text-sm">
-                      <a href="https://github.com/samirbhattarai135/Arduino-Robotics">
+                      <a
+                        href="https://github.com/samirbhattarai135/Arduino-Robotics"
+                        target="_blank"
+                      >
                         <span
                           aria-hidden="true"
                           class="absolute inset-0"
@@ -923,7 +1023,10 @@ export default function Home() {
                 <div class="mt-4 flex justify-between">
                   <div>
                     <h3 class="text-sm">
-                      <a href="https://github.com/samirbhattarai135/Python-Projects">
+                      <a
+                        href="https://github.com/samirbhattarai135/Python-Projects"
+                        target="_blank"
+                      >
                         <span
                           aria-hidden="true"
                           class="absolute inset-0"
@@ -951,7 +1054,10 @@ export default function Home() {
                 <div class="mt-4 flex justify-between">
                   <div>
                     <h3 class="text-sm">
-                      <a href="https://github.com/samirbhattarai135/C---projects">
+                      <a
+                        href="https://github.com/samirbhattarai135/C---projects"
+                        target="_blank"
+                      >
                         <span
                           aria-hidden="true"
                           class="absolute inset-0"
@@ -1017,7 +1123,7 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="https://www.instagram.com/saaammmiiirrrrr/"
+                      href="https://www.instagram.com/samirrr_135/"
                       className="hover:underline"
                     >
                       Instagram
