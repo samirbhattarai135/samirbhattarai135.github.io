@@ -322,7 +322,7 @@ export default function Home() {
           Samir
         </a>
         <a
-          href="/Resume_Samir.pdf"
+          href="/Recent_Resume.pdf"
           target="_blank"
           onClick={toggleResumeVisibility}
           className="animated-button bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white transition-all duration-300"
