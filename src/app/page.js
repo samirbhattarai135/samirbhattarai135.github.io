@@ -322,7 +322,7 @@ export default function Home() {
           Samir
         </a>
         <a
-          href="/Recent_Resume.pdf"
+          href="/Resume.pdf"
           target="_blank"
           onClick={toggleResumeVisibility}
           className="animated-button bg-white text-black px-6 py-2 rounded-full hover:bg-gray-800 hover:text-white transition-all duration-300"
@@ -401,7 +401,7 @@ export default function Home() {
             </li>
             <li>
               <a
-                href="/Recent_Resume.pdf"
+                href="/Resume.pdf"
                 target="_blank"
                 onClick={toggleResumeVisibility}
                 className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg"
