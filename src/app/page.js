@@ -306,9 +306,9 @@ export default function Home() {
         </div>
       )}
       <div className="lines">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
+        <div className="line"></div>
       </div>
       <link rel="icon" type="image/png" href="/favicon.png" />
 
@@ -368,7 +368,7 @@ export default function Home() {
           <ul className="space-y-4">
             <li className="cursor-pointer hover:underline hover:text-white hover:text-shadow-lg">
               <a
-                href="#home"
+                href="/"
                 onClick={(event) => scrollToSection(event, "aboutme")}
               >
                 Home
@@ -956,11 +956,11 @@ export default function Home() {
                 <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 lg:h-80">
                   <Image
                     src="/tts.png"
-                    alt="Front of men&#039;s Basic Tee in black."
+                    alt="ESP 32 with Chat GPT"
                     width={100}
                     height={100}
                     className="w-full object-cover object-center lg:h-auto lg:w-full"
-                  ></Image>
+                  />
                 </div>
                 <div class="mt-4 flex justify-between">
                   <div>
@@ -1164,7 +1164,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <ul class="circles">
+          <ul className="circles">
             <li></li>
             <li></li>
             <li></li>
